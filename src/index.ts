@@ -1,7 +1,7 @@
 import express from 'express'
 import https from 'https'
 import { config } from 'dotenv'
-import wellnessRouter from './src/routes/wellness'
+import wellnessRouter from './routes/wellness'
 import schedule from 'node-schedule'
 import cron from 'node-cron'
 
