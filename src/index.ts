@@ -32,7 +32,7 @@ function keepAlive(url: string) {
 }
 
 // Schedule a job to keep the server alive
-cron.schedule('*/5 * * * *', () => {
-  keepAlive('')
-  console.log('Pinged the server every 5 minutes')
-})
+// cron.schedule('*/5 * * * *', () => {
+//   keepAlive('')
+//   console.log('Pinged the server every 5 minutes')
+// })
