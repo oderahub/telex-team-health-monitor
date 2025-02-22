@@ -10,13 +10,11 @@ app.use(express.json())
 
 app.disable('x-powered-by')
 
+app.get('/', (req, res) => {
+  res.send('Team health monitor!')
+})
+
 app.use('/api', wellnessRouter)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
-
-// Schedule daily at 9 AM
-schedule.scheduleJob('0 9 * * *', async () => {
-  // Here you would call your wellness check function
-  console.log('Scheduled wellness check at 9 AM')
-})
