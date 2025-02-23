@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.4",
@@ -33,6 +34,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "node-cron": "^3.0.3"
   }
 }

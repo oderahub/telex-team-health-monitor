@@ -4,11 +4,20 @@ import { config } from 'dotenv'
 import wellnessRouter from './routes/wellness'
 import schedule from 'node-schedule'
 import cron from 'node-cron'
+import cors from 'cors'
 
 config()
 
 const app = express()
 app.use(express.json())
+
+app.use(
+  cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: ['Content-Type', 'Authorization']
+  })
+)
 
 app.disable('x-powered-by')
 
@@ -32,7 +41,7 @@ function keepAlive(url: string) {
 }
 
 // Schedule a job to keep the server alive
-// cron.schedule('*/5 * * * *', () => {
-//   keepAlive('')
-//   console.log('Pinged the server every 5 minutes')
-// })
+cron.schedule('*/5 * * * *', () => {
+  keepAlive('https://telex-team-health-monitor.onrender.com/')
+  console.log('Pinged the server every 5 minutes')
+})
