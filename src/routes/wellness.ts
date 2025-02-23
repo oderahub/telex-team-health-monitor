@@ -9,15 +9,20 @@ router.post('/send-check-in', async (req, res) => {
     const form = await createForm()
     const formUrl = form._links?.display || 'URL not found'
 
-    // Get return_url from the request body (sent by Telex)
     const returnUrl = req.body.return_url
     console.log('Received return_url:', returnUrl)
     if (returnUrl) {
-      await fetch(returnUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: `New wellness check-in: ${formUrl}` })
-      })
+      try {
+        await fetch(returnUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `New wellness check-in: ${formUrl}` })
+        })
+        console.log('Successfully sent to return_url')
+      } catch (fetchError) {
+        console.error('Failed to send to return_url:', (fetchError as Error).message)
+        // Continue execution instead of failing
+      }
     }
 
     res.json({ success: true, message: 'Check-in sent', formUrl })
