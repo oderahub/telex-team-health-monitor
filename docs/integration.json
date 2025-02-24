@@ -15,6 +15,7 @@
     "integration_type": "interval",
     "is_active": true,
     "tick_url": "https://telex-team-health-monitor.onrender.com/api/send-check-in",
+    "target_url": "",
     "key_features": [
       "Creates a daily Typeform survey",
       "Sends form URL to team-health-monitor channel at 9 AM",
