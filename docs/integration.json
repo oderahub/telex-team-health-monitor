@@ -1,0 +1,48 @@
+{
+  "data": {
+    "date": {
+      "created_at": "2025-02-23",
+      "updated_at": "2025-02-23"
+    },
+    "descriptions": {
+      "app_name": "Remote Team Health Monitor",
+      "app_description": "Sends daily wellness check-ins at 9 AM to monitor remote team health using Typeform.",
+      "app_url": "https://telex-team-health-monitor.onrender.com",
+      "app_logo": "https://raw.githubusercontent.com/telex_integrations/telex-team-health-monitor/main/logo.png",
+      "background_color": "#26A69A"
+    },
+    "integration_category": "CRM & Customer Support",
+    "integration_type": "interval",
+    "is_active": true,
+    "tick_url": "https://telex-team-health-monitor.onrender.com/api/send-check-in",
+    "key_features": [
+      "Creates a daily Typeform survey",
+      "Sends form URL to team-health-monitor channel at 9 AM",
+      "Tracks team well-being responses"
+    ],
+    "permissions": {
+      "monitoring_user": {
+        "always_online": true,
+        "display_name": "Health Monitor"
+      }
+    },
+    "settings": [
+      {
+        "label": "interval",
+        "type": "text",
+        "required": true,
+        "default": "*/5 * * * *",
+        "description": "Cron schedule for daily check-ins (default: 9 AM)"
+      }
+    ],
+    "output": [
+      {
+        "label": "team-health-monitor",
+        "value": true
+      }
+    ],
+    "author": "chidera",
+    "version": "1.0.0",
+    "authorProfile": "https://github.com/oderahub"
+  }
+}
