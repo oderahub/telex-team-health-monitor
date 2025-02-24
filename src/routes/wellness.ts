@@ -1,30 +1,29 @@
 import { Router } from 'express'
 import { createForm, getFormResponses } from '../services/typeformService'
 import fetch from 'node-fetch'
+import config from '../config/config'
 
 const router = Router()
-const TELEX_WEBHOOK_URL = 'https://ping.telex.im/v1/webhooks/01953768-51a0-7689-951c-404b5a46a508'
 
 router.post('/send-check-in', async (req, res) => {
   try {
     const form = await createForm()
     const formUrl = form._links?.display || 'URL not found'
 
-    // Send to Telex channel webhook
-    const telexPayload = {
-      event_name: 'health_check',
-      message: `New wellness check-in: ${formUrl}`,
-      status: 'success',
-      username: 'HealthMonitorBot' // Or your name
+    const returnUrl = req.body.return_url || config.telexWebhookUrl
+
+    if (returnUrl) {
+      await fetch(returnUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: 'health_check',
+          message: `New wellness check-in: ${formUrl}`,
+          status: 'success',
+          username: 'HealthMonitorBot'
+        })
+      })
     }
-    await fetch(TELEX_WEBHOOK_URL, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(telexPayload)
-    }).catch((err) => console.error('Telex webhook error:', err))
 
     res.json({ success: true, message: 'Check-in sent', formUrl })
   } catch (error) {

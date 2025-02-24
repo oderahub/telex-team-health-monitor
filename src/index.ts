@@ -1,12 +1,10 @@
 import express from 'express'
 import https from 'https'
-import { config } from 'dotenv'
+import config from './config/config'
 import wellnessRouter from './routes/wellness'
-import schedule from 'node-schedule'
+import { errorHandler } from './utils/errorHandler'
 import cron from 'node-cron'
 import cors from 'cors'
-
-config()
 
 const app = express()
 app.use(express.json())
@@ -27,8 +25,10 @@ app.get('/', (req, res) => {
 
 app.use('/api', wellnessRouter)
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.use(errorHandler)
+
+const PORT = config.port
+app.listen(PORT, () => console.log(`Server running on port ${config.port}`))
 
 function keepAlive(url: string) {
   https

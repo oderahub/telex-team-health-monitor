@@ -26,7 +26,7 @@ export function setCurrentFormId(id: string) {
 }
 
 export function getCurrentFormId(): string {
-  return currentFormId || config.defaultFormId || 'oJXZwgKi'
+  return currentFormId || config.defaultFormId
 }
 
 export async function createForm(): Promise<TypeformResponse> {
@@ -129,11 +129,7 @@ export async function createForm(): Promise<TypeformResponse> {
     }
   ]
 
-  const body = {
-    title: 'Remote Team Health Check',
-    fields: questions
-  }
-
+  const body = { title: 'Remote Team Health Check', fields: questions }
   const response = await fetch('https://api.typeform.com/forms', {
     method: 'POST',
     headers: {
@@ -155,14 +151,12 @@ export async function createForm(): Promise<TypeformResponse> {
 export async function getFormResponses(): Promise<any> {
   const formId = getCurrentFormId()
   const response = await fetch(`https://api.typeform.com/forms/${formId}/responses`, {
-    headers: {
-      Authorization: `Bearer ${config.typeformApiKey}`
-    }
+    headers: { Authorization: `Bearer ${config.typeformApiKey}` }
   })
 
   if (!response.ok) {
     throw new Error(`Failed to fetch responses: ${response.statusText}`)
   }
 
-  return await response.json()
+  return response.json()
 }
