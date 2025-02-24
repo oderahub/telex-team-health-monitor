@@ -8,7 +8,7 @@
       "app_name": "Remote Team Health Monitor",
       "app_description": "Sends daily wellness check-ins at 9 AM to monitor remote team health using Typeform.",
       "app_url": "https://telex-team-health-monitor.onrender.com",
-      "app_logo": "https://raw.githubusercontent.com/telex_integrations/telex-team-health-monitor/main/logo.png",
+      "app_logo": "https://asset.cloudinary.com/dcsuoee4b/a03d19e1dd853c8927a0e66b001223e2",
       "background_color": "#26A69A"
     },
     "integration_category": "CRM & Customer Support",
