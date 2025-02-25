@@ -32,7 +32,7 @@
         "label": "interval",
         "type": "text",
         "required": true,
-        "default": "*/5 * * * *",
+        "default": "0 9 * * *",
         "description": "Cron schedule for daily check-ins (default: 9 AM)"
       }
     ],
